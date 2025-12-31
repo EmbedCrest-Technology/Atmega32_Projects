@@ -1,0 +1,142 @@
+/*
+ * TIMER.c
+ *
+ * Created: 8/12/2024 4:07:42 PM
+ *  Author: Embedcrest Technology Private Limited
+ */ 
+
+#include "TIMER.h"
+
+/* =============== RENAMED FUNCTION =============== */
+void setup_timer0_ctc_wave(void)
+{
+	//determine CTC mode
+	CLR_BIT(TCCR0,WGM00);
+	SET_BIT(TCCR0,WGM01);
+
+	OCR0 = 80;
+
+	SET_BIT(TCCR0,CS00);
+	CLR_BIT(TCCR0,CS01);
+	SET_BIT(TCCR0,CS02);
+
+	SET_BIT(DDRB,PB3);
+
+	SET_BIT(TCCR0,COM00);
+	CLR_BIT(TCCR0,COM01);
+}
+
+/* =============== NO CHANGE (AS REQUESTED) =============== */
+void TIMER0_fast_pwm_wave(void)
+{
+	SET_BIT(TCCR0,WGM00);
+	SET_BIT(TCCR0,WGM01);
+
+	OCR0=64;
+
+	SET_BIT(TCCR0,CS00);
+	CLR_BIT(TCCR0,CS01);
+	SET_BIT(TCCR0,CS02);
+
+	SET_BIT(DDRB,PB3);
+
+	CLR_BIT(TCCR0,COM00);
+	SET_BIT(TCCR0,COM01);
+}
+
+void TIMER0_phase_correct_pwm_wave(void)
+{
+	SET_BIT(TCCR0,WGM00);
+	CLR_BIT(TCCR0,WGM01);
+
+	OCR0=64;
+
+	SET_BIT(TCCR0,CS00);
+	CLR_BIT(TCCR0,CS01);
+	SET_BIT(TCCR0,CS02);
+
+	SET_BIT(DDRB,PB3);
+
+	CLR_BIT(TCCR0,COM00);
+	SET_BIT(TCCR0,COM01);
+}
+
+void TIMER2_CTC_wave_nonpwm(void)
+{
+	CLR_BIT(TCCR2,WGM20);
+	SET_BIT(TCCR2,WGM21);
+
+	OCR2=64;
+
+	CLR_BIT(ASSR,AS2);
+	SET_BIT(TCCR2,CS20);
+	SET_BIT(TCCR2,CS21);
+	SET_BIT(TCCR2,CS22);
+
+	SET_BIT(DDRD,PD7);
+
+	SET_BIT(TCCR2,COM20);
+	CLR_BIT(TCCR2,COM21);
+}
+
+void TIMER2_fast_pwm_wave(void)
+{
+	SET_BIT(TCCR2,WGM20);
+	SET_BIT(TCCR2,WGM21);
+
+	OCR2=64;
+
+	CLR_BIT(ASSR,AS2);
+	SET_BIT(TCCR2,CS20);
+	SET_BIT(TCCR2,CS21);
+	SET_BIT(TCCR2,CS22);
+
+	SET_BIT(DDRD,PD7);
+
+	CLR_BIT(TCCR0,COM00);
+	SET_BIT(TCCR0,COM01);
+}
+
+/* =============== RENAMED FUNCTION =============== */
+void setup_timer2_phase_correct_pwm(void)
+{
+	SET_BIT(TCCR2,WGM20);
+	CLR_BIT(TCCR2,WGM21);
+
+	OCR2=64;
+
+	CLR_BIT(ASSR,AS2);
+	SET_BIT(TCCR2,CS20);
+	SET_BIT(TCCR2,CS21);
+	SET_BIT(TCCR2,CS22);
+
+	SET_BIT(DDRD,PD7);
+
+	CLR_BIT(TCCR2,COM20);
+	SET_BIT(TCCR2,COM21);
+}
+
+/* =============== RENAMED FUNCTION =============== */
+void setup_timer1_fast_pwm8(void)
+{
+	SET_BIT(TCCR1A,WGM10);
+	CLR_BIT(TCCR1A,WGM11);
+	SET_BIT(TCCR1B,WGM12);
+	CLR_BIT(TCCR1B,WGM13);
+
+	OCR1A = 64;
+	OCR1B = 64;
+
+	SET_BIT(TCCR1B,CS10);
+	CLR_BIT(TCCR1B,CS11);
+	SET_BIT(TCCR1B,CS12);
+
+	SET_BIT(DDRD,PD5);
+	SET_BIT(DDRD,PD4);
+
+	CLR_BIT(TCCR1A,COM1A0);
+	SET_BIT(TCCR1A,COM1A1);
+
+	SET_BIT(TCCR1A,COM1B0);
+	SET_BIT(TCCR1A,COM1B1);
+}
